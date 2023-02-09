@@ -1,2 +1,2 @@
 # GUI-Qt
-GUI-Qt teamwork with Jassica and Elina
+GUI-Qt teamwork with Jessica and Elina
