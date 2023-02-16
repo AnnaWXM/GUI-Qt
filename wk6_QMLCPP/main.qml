@@ -7,38 +7,80 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("wk 6 Timer Exercise!")
 
-    Text
+    TextField
     {
         id:txt_box
         text: "Start display"
-        anchors.verticalCenterOffset: -170
-        anchors.horizontalCenterOffset: -204
+        anchors.verticalCenterOffset: -190
+        anchors.horizontalCenterOffset: -200
         anchors.centerIn: parent
+        background: Rectangle{
+            border.color: "#dcdcdc"
+            radius: 5
+            implicitHeight:50
+            implicitWidth:100
+        }
+
+    }
+    TextField
+    {
+        id:txt_box_timer
+        text: "timer off"
+        anchors.verticalCenterOffset: -50
+        anchors.horizontalCenterOffset: -200
+        anchors.centerIn: parent
+        background: Rectangle{
+            border.color: "#dcdcdc"
+            radius: 5
+            implicitHeight:50
+            implicitWidth:100
+
+        }
 
     }
 
+    TextField
+    {
+        id:txt_box_extra
+        text: "Deactivated"
+        anchors.verticalCenterOffset: 20
+        anchors.horizontalCenterOffset: -125
+        anchors.centerIn: parent
+        background: Rectangle{
+            border.color: "#dcdcdc"
+            radius: 5
+            implicitHeight:50
+            implicitWidth:250
+
+        }
+
+    }
     Button
     {
         id: btn_on
         text: qsTr("on")
-        anchors.verticalCenterOffset: -118
-        anchors.horizontalCenterOffset: -192
+        anchors.verticalCenterOffset: -120
+        anchors.horizontalCenterOffset: -200
         anchors.centerIn: parent
+        enabled:true
+        background: Rectangle
+        {
+            color: btn_on.enabled ? "#adff2f": "#dcdcdc"
+            border.color:"#c0c0c0"
+            radius: 5
+            implicitHeight:50
+            implicitWidth:100
+        }
 
-//        background: Rectangle
-//        {
-//            color: btn_on.pressed ? "grey" : "grey"
-//        }
         onClicked:
         {
-            myapp.func_btn_clk_on()
-
-            btn_on.enabled=true;
-            btn_on.bgColor= "green"
-            btn_off.enabled=false;
-//            btn_off.bgColor= "grey"
+           myapp.func_btn_clk_on()
+           btn_on.enabled=false;
+           btn_off.enabled= true;
+            myapp.timer_show()
+            timer1.restart()
 
         }
     }
@@ -47,21 +89,37 @@ Window {
         id: btn_off
         text: qsTr("off")
         anchors.verticalCenterOffset: -118
-        anchors.horizontalCenterOffset: -50
+        anchors.horizontalCenterOffset: -60
         anchors.centerIn: parent
-//        background: Rectangle
-//        {
-//            color: btn_off.pressed ? "grey" : "red"
-//        }
+        enabled:false
+        background: Rectangle
+        {
+            color: btn_off.enabled ? "#ff69b4" : "#dcdcdc"
+            border.color:"#c0c0c0"
+            radius: 5
+            implicitHeight:50
+            implicitWidth:100
+        }
 
         onClicked:
         {
             myapp.func_btn_clk_off()
+            btn_off.enabled=false;
+            btn_on.enabled=true;
+            timer1.stop()
+        }
+    }
 
-            btn_off.enabled=true;
-            btn_off.bgColor= "green"
-            btn_on.enabled=false;
-//            btn_on.bgColor= "grey"
+    Item{
+        Timer{
+            id: timer1
+            interval:1000; running: false; repeat :true
+            onTriggered:
+            {
+                myapp.timer_counter()
+                myapp.timer_show()
+                myapp.timer_extra()
+            }
 
         }
     }
@@ -71,6 +129,12 @@ Window {
         ignoreUnknownSignals: true
         function onSendMess(text_box_str){
             txt_box.text = text_box_str
+        }
+        function onSendMess2(text_box_str2){
+            txt_box_timer.text = text_box_str2
+        }
+        function onSendMess3(text_box_str3){
+            txt_box_extra.text = text_box_str3
         }
     }
     }
