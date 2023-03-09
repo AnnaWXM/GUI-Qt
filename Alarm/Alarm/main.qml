@@ -76,6 +76,88 @@ Window {
         text: qsTr("SET")
     }
 
+    Text {
+        id: brand
+        x:180
+        y:120
+        text: "NIKKEI"
+        font.pointSize: 16
+    }
+
+
+    Rectangle {
+        x: 60
+        y: 150
+        width: 280
+        height: 100
+        color: "lightgrey"
+        border.color: "grey"
+        Text{
+            id:realtime
+            text:"09:29"
+            font.pointSize: 50
+        }
+
+    }
+
+    Rectangle {
+        x: 60
+        y: 250
+        width: 80
+        height: 50
+        color: "lightgrey"
+        border.color: "grey"
+        Text{
+            id:daymonth
+            text:"29/8"
+            font.pointSize: 30
+        }
+
+
+
+    }
+
+    Rectangle {
+        x: 140
+        y: 250
+        width: 65
+        height: 50
+        color: "lightgrey"
+        border.color: "grey"
+        Text{
+            id:week
+            text:"THU"
+            font.pointSize: 30
+        }
+
+    }
+
+    Rectangle {
+        x: 205
+        y: 250
+        width: 135
+        height: 50
+        color: "lightgrey"
+        border.color: "grey"
+        Text{
+            id:temphumi
+            text:"23C59%"
+            font.pointSize: 30
+        }
+
+    }
+
+    Connections
+    {
+        target:myApp
+        ignoreUnknownSignals: true
+        function onSendMess(date_value)
+        {
+            daymonth.text=date_value;
+        }
+
+    }
+
 
 
 }

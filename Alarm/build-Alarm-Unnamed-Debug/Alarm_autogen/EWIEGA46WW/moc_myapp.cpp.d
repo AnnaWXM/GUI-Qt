@@ -1,4 +1,5 @@
-Alarm_autogen/timestamp: \
+/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/Alarm_autogen/EWIEGA46WW/moc_myapp.cpp: /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/myapp.h \
+  /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/Alarm_autogen/moc_predefs.h \
   /Applications/5.15.12/macos/lib/QtCore.framework/Versions/5/Headers/QObject \
   /Applications/5.15.12/macos/lib/QtCore.framework/Versions/5/Headers/qalgorithms.h \
   /Applications/5.15.12/macos/lib/QtCore.framework/Versions/5/Headers/qarraydata.h \
@@ -44,76 +45,6 @@ Alarm_autogen/timestamp: \
   /Applications/5.15.12/macos/lib/QtCore.framework/Versions/5/Headers/qvarlengtharray.h \
   /Applications/5.15.12/macos/lib/QtCore.framework/Versions/5/Headers/qvector.h \
   /Applications/5.15.12/macos/lib/QtCore.framework/Versions/5/Headers/qversiontagging.h \
-  /Applications/5.15.12/macos/lib/cmake/Qt5/Qt5Config.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5/Qt5ConfigVersion.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5/Qt5ModuleLocation.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Core/Qt5CoreConfig.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Core/Qt5CoreMacros.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QCocoaIntegrationPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QMacHeifPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QMacJp2Plugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QPdfPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QVirtualKeyboardPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QWebGLIntegrationPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Network/Qt5NetworkConfig.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Network/Qt5NetworkConfigVersion.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5QmlConfig.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5QmlConfigExtras.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5QmlConfigVersion.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QDebugMessageServiceFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QLocalClientConnectionFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlDebugServerFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlDebuggerServiceFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlInspectorServiceFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlNativeDebugConnectorFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlNativeDebugServiceFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlPreviewServiceFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQmlProfilerServiceFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QQuickProfilerAdapterFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Qml/Qt5Qml_QTcpServerConnectionFactory.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5QmlModels/Qt5QmlModelsConfig.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5QmlModels/Qt5QmlModelsConfigVersion.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Quick/Qt5QuickConfig.cmake \
-  /Applications/5.15.12/macos/lib/cmake/Qt5Quick/Qt5QuickConfigVersion.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeCXXInformation.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeGenericSystem.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeParseArguments.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/AppleClang-CXX.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/Clang.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Compiler/GNU.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-AppleClang-CXX.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-Clang-CXX.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Darwin-Initialize.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/Darwin.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/share/cmake-3.24/Modules/Platform/UnixPaths.cmake \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h \
@@ -420,13 +351,4 @@ Alarm_autogen/timestamp: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/qos.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/time.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include/stdarg.h \
-  /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/CMakeLists.txt \
-  /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/main.cpp \
-  /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/myapp.cpp \
-  /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/myapp.h \
-  /Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/qml.qrc \
-  Alarm_autogen/moc_predefs.h \
-  CMakeFiles/3.24.2/CMakeCXXCompiler.cmake \
-  CMakeFiles/3.24.2/CMakeSystem.cmake \
-  /Applications/Tools/CMake/CMake.app/Contents/bin/cmake
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include/stdarg.h
