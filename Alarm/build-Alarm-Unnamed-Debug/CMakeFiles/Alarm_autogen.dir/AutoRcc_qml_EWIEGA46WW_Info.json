@@ -1,0 +1,19 @@
+{
+	"BUILD_DIR" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/Alarm_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm",
+	"CMAKE_SOURCE_DIR" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm",
+	"INCLUDE_DIR" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/Alarm_autogen/include",
+	"INPUTS" : [ "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/main.qml" ],
+	"LOCK_FILE" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/Alarm_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "qml" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_qml.cpp",
+	"RCC_EXECUTABLE" : "/Applications/5.15.12/macos/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/Alarm_autogen.dir/AutoRcc_qml_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/qml.qrc",
+	"VERBOSITY" : 0
+}
