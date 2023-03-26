@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 
 Window {
 
-    property string arr_up: "file:/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/Alarm/images.png";
+    property string arr_up: "file:/Users/annnwu/Desktop/github/GUI-Qt/Alarm/Alarm/images.png";
 
     width: 640
     height: 480
@@ -64,6 +64,9 @@ Window {
         height: 50
         radius:10
         text: qsTr("ALM SET")
+        onClicked: {
+            myapp.func_almset_btn_clk();
+        }
     }
 
     RoundButton {
@@ -74,6 +77,9 @@ Window {
         height: 50
         radius:10
         text: qsTr("SET")
+        onClicked: {
+            myapp.func_set_btn_clk();
+        }
     }
 
     Text {
@@ -94,10 +100,18 @@ Window {
         border.color: "grey"
         Text{
             id:realtime
-            text:"09:29"
+            text:"00:00"
             font.pointSize: 50
         }
 
+    }
+
+    Text {
+        id: am_pm
+        x:80
+        y:220
+        text: "AM"
+        font.pointSize: 16
     }
 
     Rectangle {
@@ -109,7 +123,7 @@ Window {
         border.color: "grey"
         Text{
             id:daymonth
-            text:"29/8"
+            text:"1/1"
             font.pointSize: 30
         }
 
@@ -147,17 +161,30 @@ Window {
 
     }
 
-    Connections
-    {
-        target:myApp
-        ignoreUnknownSignals: true
-        function onSendMess(date_value)
-        {
-            daymonth.text=date_value;
-        }
-
+    Text {
+        id: state_box
+        x:500
+        y:220
+        text: "Initial state"
+        font.pointSize: 16
     }
 
 
+
+    Connections
+    {
+        target:myapp
+        ignoreUnknownSignals: true
+        function onSendMess1(date_value){
+            daymonth.text=date_value;
+        }
+        function onSendMess2(state_str){
+            state_box.text = state_str;
+        }
+        function onSendMess3(am_pm_str){
+            am_pm.text = am_pm_str;
+        }
+
+    }
 
 }
