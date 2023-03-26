@@ -21,8 +21,21 @@ void calculatorinterface::displayText(const QString &s){
 }
 
 void calculatorinterface::calVolt(const QString &resistance, const QString &amps ){
-    double a=amps.toDouble();
-    double r=resistance.toDouble();
+    bool ok;
+    double r = resistance.toDouble(&ok);
+    if (!ok) {
+        emit sendMess_res("Invalid!");
+        qDebug() << "Invalid input for resistance: " << resistance;
+        return;
+    }
+
+    double a = amps.toDouble(&ok);
+    if (!ok) {
+        emit sendMess_amps("Invalid!");
+        qDebug() << "Invalid input for amps: " << amps;
+        return;
+    }
+
     double v=a*r;
     emit sendMess_volt(QString::number(v, 'f', 2));
     qDebug() << "Calculation result (voltage=resistance*amps): "<< v;
@@ -30,16 +43,41 @@ void calculatorinterface::calVolt(const QString &resistance, const QString &amps
 }
 
 void calculatorinterface::calAmp(const QString &resistance, const QString &voltage){
-    double r=resistance.toDouble();
-    double v=voltage.toDouble();
+    bool ok;
+    double v = voltage.toDouble(&ok);
+    if (!ok) {
+        emit sendMess_volt("Invalid!");
+        qDebug() << "Invalid input for voltage: " << voltage;
+        return;
+    }
+
+    double r = resistance.toDouble(&ok);
+    if (!ok || r==0) {
+        emit sendMess_res("Invalid!");
+        qDebug() << "Invalid input for resistance: " << resistance;
+        return;
+    }
     double a=v/r;
     emit sendMess_amps(QString::number(a, 'f', 2));
     qDebug() << "Calculation result (amps=voltage/resistance): "<< a;
 
 }
 void calculatorinterface::calResis(const QString &voltage, const QString &amps ){
-    double a=amps.toDouble();
-    double v=voltage.toDouble();
+    bool ok;
+    double a = amps.toDouble(&ok);
+    if (!ok || a==0) {
+        emit sendMess_amps("Invalid!");
+        qDebug() << "Invalid input for amps: " << amps;
+        return;
+    }
+
+    double v = voltage.toDouble(&ok);
+    if (!ok) {
+        emit sendMess_volt("Invalid!");
+        qDebug() << "Invalid input for voltage: " << voltage;
+        return;
+    }
+
     double r=v/a;
     emit sendMess_res(QString::number(r, 'f', 2));
     qDebug() << "Calculation result (resistance=voltage/amps): "<< r;
