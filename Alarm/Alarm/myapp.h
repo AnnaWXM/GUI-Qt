@@ -18,6 +18,7 @@ public slots:
 signals:
     void sendMess1(const QString &date_value);
     void sendMess2(const QString &state_mode);
+    void sendMess3(const QString &am_pm_str);
 };
 
 #endif // MYAPP_H
