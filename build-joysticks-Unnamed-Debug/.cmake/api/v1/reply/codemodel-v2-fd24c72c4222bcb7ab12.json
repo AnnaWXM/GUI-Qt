@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-56f3aa4ed31a46056c71.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "joysticks",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "joysticks::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joysticks-Debug-0e161463bb93c1b41cd7.json",
+					"name" : "joysticks",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "joysticks_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joysticks_autogen-Debug-dca1b2c6ed8f6291d875.json",
+					"name" : "joysticks_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "joysticks_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-joysticks_autogen_timestamp_deps-Debug-19175071c6d7bd75389f.json",
+					"name" : "joysticks_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug",
+		"source" : "/Users/annnwu/Desktop/github/GUI-Qt/joysticks"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

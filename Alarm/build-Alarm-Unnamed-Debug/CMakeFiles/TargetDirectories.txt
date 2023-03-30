@@ -1,9 +1,0 @@
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/Alarm.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/edit_cache.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/rebuild_cache.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/list_install_components.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/install.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/install/local.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/install/strip.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/Alarm_autogen_timestamp_deps.dir
-/Users/annnwu/Desktop/hmw2023spring/GUI/Alarm/build-Alarm-Unnamed-Debug/CMakeFiles/Alarm_autogen.dir

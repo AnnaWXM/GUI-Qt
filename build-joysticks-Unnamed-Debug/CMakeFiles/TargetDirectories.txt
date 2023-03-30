@@ -1,0 +1,9 @@
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/joysticks.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/edit_cache.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/rebuild_cache.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/list_install_components.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/install.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/install/local.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/install/strip.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/joysticks_autogen_timestamp_deps.dir
+/Users/annnwu/Desktop/github/GUI-Qt/build-joysticks-Unnamed-Debug/CMakeFiles/joysticks_autogen.dir
