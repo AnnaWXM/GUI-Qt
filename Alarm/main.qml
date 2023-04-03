@@ -182,13 +182,13 @@ Window {
         }
 
         Text{
-            x:35
+            x:45
             id:slash
             text:"/"
             font.pointSize: 30
         }
         Text{
-            x: 50
+            x: 60
             id:month
             text:"1"
             font.pointSize: 30

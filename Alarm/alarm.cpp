@@ -161,12 +161,14 @@ void alarm::timeVar(){
         else{
             //resetting the hr as the day change and adding to day count
             hr_value=0;
+            //which day of the week
             if (week_value<7){
                 week_value++;
             }
             else{
                 week_value=1;
             }
+            // day of the month
             if(day_value<30){
                 day_value++;
             }
