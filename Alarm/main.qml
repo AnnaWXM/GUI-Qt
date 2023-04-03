@@ -2,11 +2,12 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
+
 Window {
 
     property string arr_up: "file:///C:/Users/nnnoz/Desktop/test/Alarm/images.png";
 
-    width: 640
+    width: 700
     height: 480
     visible: true
     title: qsTr("NIKKEI ALARM")
@@ -63,9 +64,15 @@ Window {
         width: 100
         height: 50
         radius:10
-        text: qsTr("ALM SET")
+        text: qsTr("SET MODE")
         onClicked: {
             alarm.func_almset_btn_clk();
+            blink_hr.stop()
+            blink_min.stop()
+            blink_ampm.stop()
+            blink_mt.stop()
+            blink_day.stop()
+            blink_wk.stop()
         }
     }
 
@@ -76,10 +83,9 @@ Window {
         width: 100
         height: 50
         radius:10
-        text: qsTr("SET")
+        text: qsTr("SETTING")
         onClicked: {
-            alarm.func_set_btn_clk();
-        }
+            alarm.func_set_btn_clk();                    }
     }
 
     Text {
@@ -94,15 +100,47 @@ Window {
     Rectangle {
         x: 60
         y: 150
-        width: 280
-        height: 100
+        width: 400
+        height: 120
         color: "lightgrey"
         border.color: "grey"
+
         Text{
-            id:realtime
-            text:"00:00"
+            id:timehr
+            text:"00"
+            font.pointSize: 50
+            OpacityAnimator {
+                id: blink_hr
+                target: timehr
+                from: 0
+                to: 1
+                duration: 500
+                loops: Animation.Infinite
+            }
+
+        }
+
+        Text{
+            x: 100
+            id:sperator
+            text:":"
             font.pointSize: 50
         }
+
+        Text{
+            x:150
+            id:timemin
+            text:"00"
+            font.pointSize: 50
+            OpacityAnimator {
+                id: blink_min
+                target: timemin
+                from: 0
+                to: 1
+                duration: 500
+                loops: Animation.Infinite
+            }
+         }
 
     }
 
@@ -112,26 +150,64 @@ Window {
         y:220
         text: "AM"
         font.pointSize: 16
-    }
-
-    Rectangle {
-        x: 60
-        y: 250
-        width: 80
-        height: 50
-        color: "lightgrey"
-        border.color: "grey"
-        Text{
-            id:daymonth
-            text:"1/1"
-            font.pointSize: 30
+        OpacityAnimator {
+            id: blink_ampm
+            target: am_pm
+            from: 0
+            to: 1
+            duration: 500
+            loops: Animation.Infinite
         }
     }
 
     Rectangle {
-        x: 140
-        y: 250
-        width: 65
+        x: 60
+        y: 270
+        width: 110
+        height: 50
+        color: "lightgrey"
+        border.color: "grey"
+        Text{
+            id:day
+            text:"1"
+            font.pointSize: 30
+            OpacityAnimator {
+                id: blink_day
+                target: day
+                from: 0
+                to: 1
+                duration: 500
+                loops: Animation.Infinite
+            }
+        }
+
+        Text{
+            x:35
+            id:slash
+            text:"/"
+            font.pointSize: 30
+        }
+        Text{
+            x: 50
+            id:month
+            text:"1"
+            font.pointSize: 30
+            OpacityAnimator {
+                id: blink_mt
+                target: month
+                from: 0
+                to: 1
+                duration: 500
+                loops: Animation.Infinite
+            }
+        }
+
+    }
+
+    Rectangle {
+        x: 170
+        y: 270
+        width: 110
         height: 50
         color: "lightgrey"
         border.color: "grey"
@@ -139,20 +215,35 @@ Window {
             id:week
             text:"THU"
             font.pointSize: 30
+            OpacityAnimator {
+                id: blink_wk
+                target: week
+                from: 0
+                to: 1
+                duration: 500
+                loops: Animation.Infinite
+            }
         }
+
 
     }
 
     Rectangle {
-        x: 205
-        y: 250
-        width: 135
+        x: 280
+        y: 270
+        width: 180
         height: 50
         color: "lightgrey"
         border.color: "grey"
         Text{
-            id:temphumi
-            text:"23C59%"
+            id:temp
+            text:"23C "
+            font.pointSize: 30
+        }
+        Text{
+            x: 90
+            id:humi
+            text:"59%"
             font.pointSize: 30
         }
 
@@ -164,6 +255,67 @@ Window {
         y:220
         text: "Initial state"
         font.pointSize: 16
+        onTextChanged: {
+            if (state_box.text === "change hour") {
+                blink_hr.start()
+                blink_min.stop()
+                blink_ampm.stop()
+                blink_mt.stop()
+                blink_day.stop()
+                blink_wk.stop()
+
+            } else if(state_box.text === "change minute") {
+                blink_min.start()
+                blink_hr.stop()
+                blink_ampm.stop()
+                blink_mt.stop()
+                blink_day.stop()
+                blink_wk.stop()
+
+            } else if(state_box.text === "change 12/24 hours pattern") {
+                blink_ampm.start()
+                blink_hr.stop()
+                blink_min.stop()
+                blink_mt.stop()
+                blink_day.stop()
+                blink_wk.stop()
+
+            } else if(state_box.text === "change month") {
+                blink_mt.start()
+                blink_hr.stop()
+                blink_min.stop()
+                blink_ampm.stop()
+                blink_day.stop()
+                blink_wk.stop()
+
+            } else if(state_box.text === "change day") {
+                blink_day.start()
+                blink_hr.stop()
+                blink_min.stop()
+                blink_ampm.stop()
+                blink_mt.stop()
+                blink_wk.stop()
+
+            }
+         else if(state_box.text === "change weekday") {
+            blink_wk.start()
+            blink_hr.stop()
+            blink_min.stop()
+            blink_ampm.stop()
+            blink_day.stop()
+            blink_mt.stop()
+        }
+            else
+            {
+                blink_hr.stop()
+                blink_min.stop()
+                blink_ampm.stop()
+                blink_mt.stop()
+                blink_day.stop()
+                blink_wk.stop()
+
+            }
+        }
     }
 
 
