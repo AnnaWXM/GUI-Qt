@@ -324,14 +324,26 @@ Window {
     {
         target:alarm
         ignoreUnknownSignals: true
-        function onSendMess1(date_value){
-            daymonth.text=date_value;
+        function onSendMessHr(hr_value){
+            timehr.text=hr_value;
         }
-        function onSendMess2(state_str){
+        function onSendMessMin(min_value){
+            timemin.text=min_value;
+        }
+        function onSendMessAmPm(ampm_value){
+            am_pm.text=ampm_value;
+        }
+        function onSendMessDay(day_value){
+            day.text=day_value;
+        }
+        function onSendMessMonth(month_value){
+            month.text = month_value;
+        }
+        function onSendMessWeek(week_str){
+            week.text = week_str;
+        }
+        function onSendMessState(state_str){
             state_box.text = state_str;
-        }
-        function onSendMess3(am_pm_str){
-            am_pm.text = am_pm_str;
         }
 
     }
