@@ -22,7 +22,7 @@ public slots:
     void timeVar();
     void isLeapYear();
     void printWeekday(int week_value);
-    void incrment();
+    void Add();
     void reduction();
     void timer_Activate();
     void timer_Stop();

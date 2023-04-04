@@ -24,7 +24,7 @@ Window {
             anchors.fill:parent
 
             onClicked:{
-                alarm.increment();
+                alarm.Add();
             }
         }
 

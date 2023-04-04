@@ -94,6 +94,11 @@ void alarm::func_mode(bool alarm_mode, int set_mode)            // change clock 
             break;
         case 1:
             state_str = "change hour";
+            if (i>23)
+                i=0;
+            hr_value=i;
+            emit sendMessHr(QString::asprintf("%02d", hr_value));
+
             break;
         case 2:
             state_str = "change minute";
@@ -125,6 +130,10 @@ void alarm::func_mode(bool alarm_mode, int set_mode)            // change clock 
             break;                                             // no am/pm in 24 hours pattern
         case 3:
             state_str = "change hour";
+            if (i>23)
+                i=0;
+            hr_value=i;
+            emit sendMessHr(QString::asprintf("%02d", hr_value));
             break;
         case 4:
             state_str = "change minute";
@@ -349,9 +358,10 @@ void alarm::printWeekday(int week_value){
 
 
 
-void alarm::incrment(){
-    timerNew->start(1000);
+void alarm::Add(){
     i++;
+    qDebug() << "adding, current value: "+QString::number(i++);
+
 }
 void alarm::reduction(){
     i--;
