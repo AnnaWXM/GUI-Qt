@@ -56,6 +56,10 @@ alarm::alarm(QObject *parent)
     timer1->start(100);
 }
 
+//****************************************************//
+//                     Clock mode                     //
+//****************************************************//
+
 //void alarm::func_set_date()
 //{
 //    date_value = QString::number(day_value)+"/"+QString::number(month_value);
@@ -156,6 +160,10 @@ void alarm::func_set_btn_clk()
 }
 
 
+//****************************************************//
+//            Alarm ringing and snoozing              //
+//****************************************************//
+
 //void alarm::func_set_alarm(QString hour_value, QString minute_value, QString month_value, QString day_value)
 //{
 
@@ -163,9 +171,6 @@ void alarm::func_set_btn_clk()
 
 // Check if time now is alarm time and ring alarm if it is alarm time
 void alarm::check_is_alarm_time() {
-    qDebug() << "alarm_hour: " + alarm_hour;
-    qDebug() << "alarm_min: " + alarm_min;
-
     if (hr_value == alarm_hour && min_value == alarm_min) {
         ring_alarm();
     }
@@ -173,6 +178,7 @@ void alarm::check_is_alarm_time() {
 
 // Make the alarm ring
 // For debugging: message displayed when alarm rings
+// TODO: add sound effect for ringing
 void alarm::ring_alarm() {
     qDebug() << "Alarm is ringing";
     // Signal to be sent to text box alarm_status in QML
@@ -200,6 +206,11 @@ void alarm::turn_off_alarm() {
     // Signal to be sent to text box alarm_status in QML
     emit sendMessAlarmRinging("Alarm is SNOOZING!");
 }
+
+
+//****************************************************//
+//                  Time and day                      //
+//****************************************************//
 
 void alarm::timeVar(){
     // Check if current time is the time for the alarm to ring
