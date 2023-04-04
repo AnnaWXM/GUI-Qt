@@ -9,6 +9,10 @@
 #include <QUrl>
 
 
+//****************************************************//
+//               Global variables                     //
+//****************************************************//
+
 QTimer *timerNew= new QTimer();
 
 //sound effect not done yet
@@ -28,8 +32,16 @@ int set_mode=0;                    // 1 = setting clock
 QString state_str;
 
 // Alarm time that is currently set
-int alarm_hour = 2;  // int alarm_hour = 0;
-int alarm_min = 10;  // int alarm_min = 0;
+int alarm_hour = 1;  // int alarm_hour = 0;
+int alarm_min = 15;  // int alarm_min = 0;
+
+// Alarm snooze length in minutes
+int snooze_length = 10;
+
+
+//****************************************************//
+//                      Functions                     //
+//****************************************************//
 
 alarm::alarm(QObject *parent)
     :QObject{parent}
@@ -165,6 +177,28 @@ void alarm::ring_alarm() {
     qDebug() << "Alarm is ringing";
     // Signal to be sent to text box alarm_status in QML
     emit sendMessAlarmRinging("Alarm is RINGING!");
+}
+
+// Snooze alarm for snooze length and then ring alarm again
+void alarm::snooze_alarm() {
+    qDebug() << "Alarm is SNOOZING";
+    // Signal to be sent to text box alarm_status in QML
+    emit sendMessAlarmRinging("Alarm is SNOOZING!");
+
+    // TODO: change snooze_length_ms after timer is set to normal
+    //      i.e. once 1 increment occurs per min
+    // Timer to snooze and then call ring_alarm() after snooze length
+    //int snooze_length_ms = snooze_length * 60000; // snooze length in milliseconds
+    int snooze_length_ms = snooze_length * 100; // snooze length FOR TESTING
+    QTimer::singleShot(snooze_length_ms, this, &alarm::ring_alarm);
+}
+
+// Turn off ringing alarm
+void alarm::turn_off_alarm() {
+    qDebug() << "Alarm is OFF";
+
+    // Signal to be sent to text box alarm_status in QML
+    emit sendMessAlarmRinging("Alarm is SNOOZING!");
 }
 
 void alarm::timeVar(){

@@ -37,6 +37,9 @@ Window {
         width: 200
         height: 50
         text: qsTr("Snooze-Light")
+        onClicked: {
+            alarm.snooze_alarm();
+        }
     }
 
     Item {

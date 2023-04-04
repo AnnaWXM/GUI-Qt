@@ -17,6 +17,8 @@ public slots:
     //void func_set_alarm(QString hour_value, QString minute_value, QString month_value, QString day_value);
     void check_is_alarm_time();
     void ring_alarm();
+    void snooze_alarm();
+    void turn_off_alarm();
     void timeVar();
     void isLeapYear();
     void printWeekday(int week_value);
