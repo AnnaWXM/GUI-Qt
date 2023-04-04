@@ -316,6 +316,15 @@ Window {
 
             }
         }
+
+        // Text changes when alarm rings
+        Text{
+            x: -300
+            y: 150
+            id: alarm_status
+            text:"Alarm is off"
+            font.pointSize: 30
+        }
     }
 
 
@@ -345,9 +354,10 @@ Window {
         function onSendMessState(state_str){
             state_box.text = state_str;
         }
+        function onSendMessAlarmRinging(alarm_ring_message) {
+            alarm_status.text = alarm_ring_message;
+        }
 
     }
-
-
 
 }

@@ -15,6 +15,8 @@ public slots:
     void func_almset_btn_clk();
     void func_set_btn_clk();
     //void func_set_alarm(QString hour_value, QString minute_value, QString month_value, QString day_value);
+    void check_is_alarm_time();
+    void ring_alarm();
     void timeVar();
     void isLeapYear();
     void printWeekday(int week_value);
@@ -28,6 +30,7 @@ signals:
     void sendMessMonth(const QString &month_value);
     void sendMessWeek(const QString &week_str);
     void sendMessState(const QString &state_str);
+    void sendMessAlarmRinging(const QString &alarm_ring_message);
 };
 
 #endif // ALARM_H

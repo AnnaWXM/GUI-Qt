@@ -27,6 +27,10 @@ int set_mode=0;                    // 1 = setting clock
 //for the mode status
 QString state_str;
 
+// Alarm time that is currently set
+int alarm_hour = 2;  // int alarm_hour = 0;
+int alarm_min = 10;  // int alarm_min = 0;
+
 alarm::alarm(QObject *parent)
     :QObject{parent}
 
@@ -36,8 +40,8 @@ alarm::alarm(QObject *parent)
     //increment 1 per minute -> 60000
     //timer set per second -> 1000
     //now the value is set at 10 for testing purpose
-    timer1->start(10);
-
+    //timer1->start(10);
+    timer1->start(100);
 }
 
 //void alarm::func_set_date()
@@ -145,7 +149,28 @@ void alarm::func_set_btn_clk()
 
 //}
 
+// Check if time now is alarm time and ring alarm if it is alarm time
+void alarm::check_is_alarm_time() {
+    qDebug() << "alarm_hour: " + alarm_hour;
+    qDebug() << "alarm_min: " + alarm_min;
+
+    if (hr_value == alarm_hour && min_value == alarm_min) {
+        ring_alarm();
+    }
+}
+
+// Make the alarm ring
+// For debugging: message displayed when alarm rings
+void alarm::ring_alarm() {
+    qDebug() << "Alarm is ringing";
+    // Signal to be sent to text box alarm_status in QML
+    emit sendMessAlarmRinging("Alarm is RINGING!");
+}
+
 void alarm::timeVar(){
+    // Check if current time is the time for the alarm to ring
+    check_is_alarm_time();
+
     // timer is running (tested it with setting it to shorter time
     // still need to set the value for different month and also leap year thingy
     if (min_value<59){
@@ -184,8 +209,6 @@ void alarm::timeVar(){
     emit sendMessMonth(QString::asprintf("%02d", month_value));
 
     printWeekday(week_value);
-
-
 }
 
 void alarm::isLeapYear(){
