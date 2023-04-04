@@ -18,10 +18,17 @@ public slots:
     void check_is_alarm_time();
     void ring_alarm();
     void snooze_alarm();
-    void turn_off_alarm();
+    //void turn_off_alarm();
     void timeVar();
     void isLeapYear();
     void printWeekday(int week_value);
+    void incrment();
+    void reduction();
+    void timer_Activate();
+    void timer_Stop();
+    void setMode();
+    void stopSet();
+
 
 
 signals:

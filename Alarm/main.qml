@@ -22,12 +22,17 @@ Window {
         Button{
             id: up_button
             anchors.fill:parent
+
+            onClicked:{
+                alarm.increment();
+            }
         }
 
         Image{
             anchors.fill:parent
             source:arr_up
         }
+
     }
 
     Button {
@@ -40,6 +45,13 @@ Window {
         onClicked: {
             alarm.snooze_alarm();
         }
+        onPressed: {
+            alarm.timer_Activate();
+        }
+
+        onReleased:{
+            alarm.timer_Stop();
+        }
     }
 
     Item {
@@ -51,6 +63,9 @@ Window {
         Button{
             id: down_button
             anchors.fill:parent
+            onClicked:{
+                alarm.reduction();
+            }
         }
 
         Image{
@@ -67,7 +82,7 @@ Window {
         width: 100
         height: 50
         radius:10
-        text: qsTr("SET MODE")
+        text: qsTr("SET")
         onClicked: {
             alarm.func_almset_btn_clk();
             blink_hr.stop()
@@ -86,9 +101,16 @@ Window {
         width: 100
         height: 50
         radius:10
-        text: qsTr("SETTING")
+        text: qsTr("MODE")
         onClicked: {
             alarm.func_set_btn_clk();                    }
+        onPressed: {
+            alarm.setMode();
+        }
+
+        onReleased:{
+            alarm.stopSet();
+        }
     }
 
     Text {

@@ -17,16 +17,17 @@ QTimer *timerNew= new QTimer();
 
 //sound effect not done yet
 QSound eff("C:/Users/nnnoz/Desktop/test/wk7_hw/bubbling1.wav");
-QSoundEffect *bearSound=new QSoundEffect();
+QSoundEffect *alarmSound=new QSoundEffect();
 
 //initial value
 int day_value=1, month_value=1, hr_value = 0, min_value = 0, week_value=1;
 
 //variable for the modes, might still need adjusting
 bool alarm_mode=false;                 // 1 = setting alarm mode
+bool set_alarm=false;
+bool set_clock=false;
 int set_mode=0;                    // 1 = setting clock
 
-//QString date_value;
 
 //for the mode status
 QString state_str;
@@ -38,6 +39,12 @@ int alarm_min = 15;  // int alarm_min = 0;
 // Alarm snooze length in minutes
 int snooze_length = 10;
 
+//variable for increment and reduction
+int i=0;
+
+//variable for detacting long press (for setting clock, turning off alarm etc
+int cnt=0;
+int snooze_var=0;
 
 //****************************************************//
 //                      Functions                     //
@@ -47,13 +54,22 @@ alarm::alarm(QObject *parent)
     :QObject{parent}
 
 {
-    QTimer *timer1=new QTimer(this);
+    //timer for the ever running time
+    QTimer *timer1=new QTimer(this);  
     QObject::connect(timer1, &QTimer::timeout, this, &alarm::timeVar);
+
+    //timer for detacting long press
+    QObject::connect(timerNew, &QTimer::timeout, this, &alarm::timer_Activate);
+
     //increment 1 per minute -> 60000
     //timer set per second -> 1000
     //now the value is set at 10 for testing purpose
     //timer1->start(10);
     timer1->start(100);
+    //path of the sound file has to be hard coded
+    alarmSound->setSource(QUrl::fromLocalFile("C:/Users/nnnoz/Desktop/Alarm/sounds/bubbling1.wav"));
+    alarmSound->setLoopCount(QSoundEffect::Infinite);
+    alarmSound->setVolume(1.0f);
 }
 
 //****************************************************//
@@ -159,6 +175,28 @@ void alarm::func_set_btn_clk()
 
 }
 
+void alarm::setMode(){
+    timerNew->start(1000);
+    cnt++;
+    if (cnt>3 && cnt<5){
+        set_clock=true;
+        emit sendMessState("Setting clock");
+        qDebug() << "setting clock";
+
+    }
+    else if (cnt>5){
+        set_clock=false;
+        set_alarm=true;
+        emit sendMessState("Setting alarm");
+        qDebug() << "setting alarm";
+
+    }
+
+}
+void alarm::stopSet(){
+    timerNew->stop();
+    cnt=0;
+}
 
 //****************************************************//
 //            Alarm ringing and snoozing              //
@@ -178,8 +216,8 @@ void alarm::check_is_alarm_time() {
 
 // Make the alarm ring
 // For debugging: message displayed when alarm rings
-// TODO: add sound effect for ringing
 void alarm::ring_alarm() {
+    alarmSound->play();
     qDebug() << "Alarm is ringing";
     // Signal to be sent to text box alarm_status in QML
     emit sendMessAlarmRinging("Alarm is RINGING!");
@@ -187,24 +225,41 @@ void alarm::ring_alarm() {
 
 // Snooze alarm for snooze length and then ring alarm again
 void alarm::snooze_alarm() {
-    qDebug() << "Alarm is SNOOZING";
     // Signal to be sent to text box alarm_status in QML
     emit sendMessAlarmRinging("Alarm is SNOOZING!");
+    if (snooze_var<5){
 
-    // TODO: change snooze_length_ms after timer is set to normal
-    //      i.e. once 1 increment occurs per min
-    // Timer to snooze and then call ring_alarm() after snooze length
-    //int snooze_length_ms = snooze_length * 60000; // snooze length in milliseconds
-    int snooze_length_ms = snooze_length * 100; // snooze length FOR TESTING
-    QTimer::singleShot(snooze_length_ms, this, &alarm::ring_alarm);
+        // TODO: change snooze_length_ms after timer is set to normal
+        //      i.e. once 1 increment occurs per min
+        // Timer to snooze and then call ring_alarm() after snooze length
+        //int snooze_length_ms = snooze_length * 60000; // snooze length in milliseconds
+        int snooze_length_ms = snooze_length * 100; // snooze length FOR TESTING
+        QTimer::singleShot(snooze_length_ms, this, &alarm::ring_alarm);
+        qDebug() << "Alarm is SNOOZING";
+
+    }
+    else{
+        emit sendMessAlarmRinging("Alarm is OFF!");
+        qDebug() << "Alarm is OFF";
+    }
+
 }
 
-// Turn off ringing alarm
-void alarm::turn_off_alarm() {
-    qDebug() << "Alarm is OFF";
+//fpr detecting long press of the snooze button
+void alarm::timer_Activate(){
+    //stop the sound (for a while)
+    alarmSound->stop();
+    //resetting the variable
+    timerNew->start(1000);
+    cnt=cnt+1;
+    qDebug() << "Long press started!"<<cnt;
+}
 
-    // Signal to be sent to text box alarm_status in QML
-    emit sendMessAlarmRinging("Alarm is SNOOZING!");
+void alarm::timer_Stop(){
+    timerNew->stop();
+    snooze_var=cnt;
+    cnt=0;
+    qDebug() << "Long press ends!" <<snooze_var;
 }
 
 
@@ -290,4 +345,18 @@ void alarm::printWeekday(int week_value){
     }
     emit sendMessWeek(wk_day);
 
+}
+
+
+
+void alarm::incrment(){
+    timerNew->start(1000);
+    i++;
+}
+void alarm::reduction(){
+    i--;
+    //so it don't go in to the minus
+    if(i<0){
+        i=0;
+    }
 }
