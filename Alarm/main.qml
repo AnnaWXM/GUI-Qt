@@ -104,13 +104,7 @@ Window {
         text: qsTr("MODE")
         onClicked: {
             alarm.func_set_btn_clk();                    }
-        onPressed: {
-            alarm.setMode();
-        }
 
-        onReleased:{
-            alarm.stopSet();
-        }
     }
 
     Text {

@@ -23,10 +23,10 @@ QSoundEffect *alarmSound=new QSoundEffect();
 int day_value=1, month_value=1, hr_value = 0, min_value = 0, week_value=1;
 
 //variable for the modes, might still need adjusting
-bool alarm_mode=false;                 // 1 = setting alarm mode
+int alarm_mode=0;                 // 1 = setting alarm mode, 2 setting clock, 0 off with both (value set)
+int set_mode=0;                    // 1 = setting clock
 bool set_alarm=false;
 bool set_clock=false;
-int set_mode=0;                    // 1 = setting clock
 
 
 //for the mode status
@@ -35,6 +35,7 @@ QString state_str;
 // Alarm time that is currently set
 int alarm_hour = 1;  // int alarm_hour = 0;
 int alarm_min = 15;  // int alarm_min = 0;
+
 
 // Alarm snooze length in minutes
 int snooze_length = 10;
@@ -76,135 +77,269 @@ alarm::alarm(QObject *parent)
 //                     Clock mode                     //
 //****************************************************//
 
-//void alarm::func_set_date()
-//{
-//    date_value = QString::number(day_value)+"/"+QString::number(month_value);
-//    emit sendMess1(date_value);
-//}
 
-void alarm::func_mode(bool alarm_mode, int set_mode)            // change clock mode by press buttons
+void alarm::func_mode(int alarm_mode, int set_mode)            // change clock mode by press buttons
 {
     // need a protection to avoid turn on two setting mode at same time
     //setting which mode to switch to depanding the bool value (might want to change later since the "set" function is not defined
-    if(alarm_mode) {
+    if(alarm_mode==1) {
         state_str = "setting alarm";
         switch(set_mode){
-        case 0:
-            state_str = "setting alarm";
-            break;
         case 1:
             state_str = "change hour";
-            if (i>23)
-                i=0;
-            hr_value=i;
-            emit sendMessHr(QString::asprintf("%02d", hr_value));
-
             break;
         case 2:
             state_str = "change minute";
             break;                                             // no am/pm in 24 hours pattern
         case 3:
-            state_str = "change month";
-            break;
-        case 4:
-            state_str = "change day";
-            break;
-
-        case 5:
-            state_str = "press \"set alarm\" to finish";
+            state_str = "press \"set\" to finish";
             break;
         default:
             state_str = "setting alarm mode";
         }
     }
-    else if(!alarm_mode){
+    else if(alarm_mode==2){
+        state_str = "setting clock";
         switch(set_mode){
-        case 0:
-            state_str = "normal clock mode";
-            break;
+
         case 1:
-            state_str = "enter the clock setting modle";
+            state_str = "change hour";
             break;
         case 2:
-            state_str = "change 12/24 hours pattern";          // show am/pm in 12 hours pattern
+            state_str = "change minute";
             break;                                             // no am/pm in 24 hours pattern
         case 3:
-            state_str = "change hour";
-            if (i>23)
-                i=0;
-            hr_value=i;
-            emit sendMessHr(QString::asprintf("%02d", hr_value));
-            break;
-        case 4:
-            state_str = "change minute";
-            break;
-        case 5:
             state_str = "change weekday";                         // change to weekday???
             break;
-        case 6:
+        case 4:
             state_str = "change month";
             break;
-        case 7:
+        case 5:
             state_str = "change day";
             break;
+        case 6:
+            state_str = "press \"set\" to finish";
+            break;
         default:
-            state_str = "normal clock mode";
+            state_str = "setting clock mode";
         }
     }
-
     emit sendMessState(state_str);
 }
 
 void alarm::func_almset_btn_clk()
 {
-    alarm_mode = !alarm_mode;
-    set_mode = 0;  //return the set mode to 0 while switching the setting mode
-    func_mode(alarm_mode, set_mode);
+    if(alarm_mode<2){
+        alarm_mode ++;
+    }
+    else{
+        alarm_mode=0;
+    }
+
+    if (alarm_mode==0){
+        state_str="showing clock";
+    }
+    else if(alarm_mode==1){
+        state_str="setting alarm";
+    }
+    else if(alarm_mode==2){
+        state_str="setting clock";
+    }
+    qDebug() << "what mode: "<<state_str;
+    qDebug() << "what alarm mode value: "<<alarm_mode;
+
+    emit sendMessState(state_str);
 
 }
 
 void alarm::func_set_btn_clk()
 {
-
-    if (!alarm_mode){
-        //entering the clock setting mode
-        if( set_mode<7)
-            set_mode++;               // how to hold for 2s to enter setting modle, from 0 to 1
-        else
-            set_mode = 0;
-    }
-    if (alarm_mode) {
+    if (alarm_mode==1) {
         //entering the alarm setting mode
-        if(set_mode<5)
+        if(set_mode<3)
             set_mode++;
         else
             set_mode = 0;
     }
+
+    else if (alarm_mode==2){
+        //entering the clock setting mode
+        if( set_mode<6)
+            set_mode++;               // how to hold for 2s to enter setting modle, from 0 to 1
+        else
+            set_mode = 0;
+    }
+
+    else if (alarm_mode==0){
+        emit sendMessMin(QString::asprintf("%02d", min_value));
+        emit sendMessHr(QString::asprintf("%02d", hr_value));
+        emit sendMessDay(QString::asprintf("%02d", day_value));
+        emit sendMessMonth(QString::asprintf("%02d", month_value));
+
+        printWeekday(week_value);
+    }
+
+    qDebug() << "what switch value: "<<set_mode;
+
     func_mode(alarm_mode, set_mode);
 
 }
 
-void alarm::setMode(){
-    timerNew->start(1000);
-    cnt++;
-    if (cnt>3 && cnt<5){
-        set_clock=true;
-        emit sendMessState("Setting clock");
-        qDebug() << "setting clock";
+
+void alarm::Add(){
+    i++;
+    // need a protection to avoid turn on two setting mode at same time
+    //setting which mode to switch to depanding the bool value (might want to change later since the "set" function is not defined
+    int ref;
+    if(alarm_mode==1) {
+        state_str = "setting alarm";
+        if(set_mode==1){
+            state_str = "change hour";
+            if(i>23){
+                i=0;
+            }
+            alarm_hour=i;
+        }
+        else if(set_mode==2) {
+            state_str = "change minute";
+            if(i>59){
+                i=0;
+            }
+            alarm_min=i;
+        }
+        emit sendMessMin(QString::asprintf("%02d", alarm_min));
+        emit sendMessHr(QString::asprintf("%02d", alarm_hour));
+    }
+
+    if(alarm_mode==2){
+        state_str = "setting clock";
+        if(set_mode==1){
+            state_str = "change hour";
+            if(i>23){
+                i=0;
+            }
+            hr_value=i;
+        }
+        else if(set_mode==2){
+            state_str = "change minute";
+            if(i>59){
+                i=0;
+            }
+            min_value=i;
+        }
+        else if(set_mode==3){
+            state_str = "change weekday";
+            if(i>7){
+                i=1;
+            }
+            week_value=i;
+        }
+        else if(set_mode==4){
+            state_str = "change month";
+            if(i>12){
+                i=1;
+            }
+            month_value=i;
+        }
+        else if(set_mode==5){
+            state_str = "change day";
+            ref= monthDay(month_value);
+            if(i>ref){
+                i=1;
+            }
+            day_value=i;
+        }
+
+        emit sendMessMin(QString::asprintf("%02d", min_value));
+        emit sendMessHr(QString::asprintf("%02d", hr_value));
+        emit sendMessDay(QString::asprintf("%02d", day_value));
+        emit sendMessMonth(QString::asprintf("%02d", month_value));
+        printWeekday(week_value);
 
     }
-    else if (cnt>5){
-        set_clock=false;
-        set_alarm=true;
-        emit sendMessState("Setting alarm");
-        qDebug() << "setting alarm";
+    qDebug() << "mode value "+QString::number(set_mode);
+    qDebug() << "alarm value "+QString::number(alarm_mode);
 
-    }
+    qDebug() << "adding, current value: "+QString::number(i);
 
 }
-void alarm::stopSet(){
-    timerNew->stop();
-    cnt=0;
+void alarm::reduction(){
+    i--;
+    //so it don't go in to the minus
+    if(i<0){
+        i=0;
+    }
+    int ref;
+    if(alarm_mode==1) {
+        state_str = "setting alarm";
+        if(set_mode==1){
+            state_str = "change hour";
+            if(i>23){
+                i=0;
+            }
+            alarm_hour=i;
+        }
+        else if(set_mode==2) {
+            state_str = "change minute";
+            if(i>59){
+                i=0;
+            }
+            alarm_min=i;
+        }
+        emit sendMessMin(QString::asprintf("%02d", alarm_min));
+        emit sendMessHr(QString::asprintf("%02d", alarm_hour));
+    }
+
+    if(alarm_mode==2){
+        state_str = "setting clock";
+        if(set_mode==1){
+            state_str = "change hour";
+            if(i>23){
+                i=0;
+            }
+            hr_value=i;
+        }
+        else if(set_mode==2){
+            state_str = "change minute";
+            if(i>59){
+                i=0;
+            }
+            min_value=i;
+        }
+        else if(set_mode==3){
+            state_str = "change weekday";
+            if(i>7){
+                i=1;
+            }
+            week_value=i;
+        }
+        else if(set_mode==4){
+            state_str = "change month";
+            if(i>12){
+                i=1;
+            }
+            month_value=i;
+        }
+        else if(set_mode==5){
+            state_str = "change day";
+            ref= monthDay(month_value);
+            if(i>ref){
+                i=1;
+            }
+            day_value=i;
+        }
+
+        emit sendMessMin(QString::asprintf("%02d", min_value));
+        emit sendMessHr(QString::asprintf("%02d", hr_value));
+        emit sendMessDay(QString::asprintf("%02d", day_value));
+        emit sendMessMonth(QString::asprintf("%02d", month_value));
+        printWeekday(week_value);
+
+    }
+    qDebug() << "mode value "+QString::number(set_mode);
+    qDebug() << "alarm value "+QString::number(alarm_mode);
+
+    qDebug() << "adding, current value: "+QString::number(i);
 }
 
 //****************************************************//
@@ -302,8 +437,8 @@ void alarm::timeVar(){
             else{
                 week_value=1;
             }
-            // day of the month
-            if(day_value<30){
+            int ref= monthDay(month_value);
+            if(day_value<ref){
                 day_value++;
             }
             else{
@@ -320,8 +455,19 @@ void alarm::timeVar(){
     printWeekday(week_value);
 }
 
-void alarm::isLeapYear(){
-
+//deciding the number of days in the month (let's leave out the leap year for now, since we are not showing the year
+int alarm::monthDay(int month){
+    int numDays=0;
+    if (month==1 || month==3|| month==5|| month==7|| month==8|| month==10|| month==12){
+        numDays=31;
+    }
+    else if(month==2){
+        numDays=28;
+    }
+    else {
+        numDays=30;
+    }
+    return numDays;
 }
 
 void alarm::printWeekday(int week_value){
@@ -356,17 +502,88 @@ void alarm::printWeekday(int week_value){
 
 }
 
-
-
-void alarm::Add(){
-    i++;
-    qDebug() << "adding, current value: "+QString::number(i++);
-
-}
-void alarm::reduction(){
-    i--;
-    //so it don't go in to the minus
-    if(i<0){
-        i=0;
+void alarm::manipulateValue(int i){
+    int ref;
+    if(alarm_mode==1) {
+        state_str = "setting alarm";
+        switch(set_mode){
+        case 1:
+            state_str = "change hour";
+            if(i>23){
+                i=0;
+            }
+            alarm_hour=i;
+            break;
+        case 2:
+            state_str = "change minute";
+            if(i>59){
+                i=0;
+            }
+            alarm_min=i;
+            break;                                             // no am/pm in 24 hours pattern
+        case 3:
+            state_str = "press \"set\" to finish";
+            break;
+        default:
+            state_str = "setting alarm mode";
+        }
     }
+    else if(alarm_mode==2){
+        state_str = "setting clock";
+        switch(set_mode){
+        case 0:
+            state_str = "setting clock mode";
+            break;
+        case 1:
+            state_str = "change hour";
+            if(i>23){
+                i=0;
+            }
+            hr_value=i;
+            break;
+        case 2:
+            state_str = "change minute";
+            if(i>59){
+                i=0;
+            }
+            min_value=i;
+            break;                                             // no am/pm in 24 hours pattern
+        case 3:
+            state_str = "change weekday";
+            if(i>7){
+                i=1;
+            }
+            week_value=i;
+            break;
+        case 4:
+            state_str = "change month";
+            if(i>12){
+                i=1;
+            }
+            month_value=i;
+            break;
+        case 5:
+            state_str = "change day";
+            ref= monthDay(month_value);
+            if(i>ref){
+                i=1;
+            }
+            day_value=i;
+            break;
+        case 6:
+            state_str = "press \"set\" to finish";
+            break;
+        default:
+            state_str = "setting clock mode";
+        }
+    }
+
+    emit sendMessMin(QString::asprintf("%02d", min_value));
+    emit sendMessHr(QString::asprintf("%02d", hr_value));
+    emit sendMessDay(QString::asprintf("%02d", day_value));
+    emit sendMessMonth(QString::asprintf("%02d", month_value));
+
+    printWeekday(week_value);
 }
+
+
