@@ -277,61 +277,108 @@ Window {
         onTextChanged: {
             if (state_box.text === "change hour") {
                 blink_hr.start()
+                blink_min.to = 1// Set the final opacity to 1
                 blink_min.stop()
+                blink_ampm.to = 1// Set the final opacity to 1
                 blink_ampm.stop()
+                blink_mt.to = 1// Set the final opacity to 1
                 blink_mt.stop()
+                blink_day.to = 1// Set the final opacity to 1
                 blink_day.stop()
+                blink_wk.to = 1// Set the final opacity to 1
                 blink_wk.stop()
+
 
             } else if(state_box.text === "change minute") {
                 blink_min.start()
+                blink_hr.to = 1// Set the final opacity to 1
                 blink_hr.stop()
+                blink_ampm.to = 1// Set the final opacity to 1
                 blink_ampm.stop()
+                blink_mt.to = 1// Set the final opacity to 1
                 blink_mt.stop()
+                blink_day.to = 1// Set the final opacity to 1
                 blink_day.stop()
+                blink_wk.to = 1// Set the final opacity to 1
                 blink_wk.stop()
+
 
             } else if(state_box.text === "change 12/24 hours pattern") {
                 blink_ampm.start()
+                blink_hr.to = 1// Set the final opacity to 1
                 blink_hr.stop()
+                blink_min.to = 1// Set the final opacity to 1
                 blink_min.stop()
+                blink_mt.to = 1// Set the final opacity to 1
                 blink_mt.stop()
+                blink_day.to = 1// Set the final opacity to 1
                 blink_day.stop()
+                blink_wk.to = 1// Set the final opacity to 1
                 blink_wk.stop()
+
 
             } else if(state_box.text === "change month") {
                 blink_mt.start()
+                blink_hr.to = 1// Set the final opacity to 1
                 blink_hr.stop()
+                blink_min.to = 1// Set the final opacity to 1
                 blink_min.stop()
+                blink_ampm.to = 1// Set the final opacity to 1
                 blink_ampm.stop()
+                blink_day.to = 1// Set the final opacity to 1
                 blink_day.stop()
+                blink_wk.to = 1// Set the final opacity to 1
                 blink_wk.stop()
+
 
             } else if(state_box.text === "change day") {
                 blink_day.start()
+                blink_hr.to = 1// Set the final opacity to 1
                 blink_hr.stop()
+                blink_min.to = 1// Set the final opacity to 1
                 blink_min.stop()
+                blink_ampm.to = 1// Set the final opacity to 1
                 blink_ampm.stop()
+                blink_mt.to = 1// Set the final opacity to 1
                 blink_mt.stop()
+                blink_wk.to = 1// Set the final opacity to 1
                 blink_wk.stop()
+
 
             }
          else if(state_box.text === "change weekday") {
-            blink_wk.start()
-            blink_hr.stop()
-            blink_min.stop()
-            blink_ampm.stop()
-            blink_day.stop()
-            blink_mt.stop()
+                blink_wk.start()
+                blink_hr.to = 1// Set the final opacity to 1
+                blink_hr.stop()
+                blink_min.to = 1// Set the final opacity to 1
+                blink_min.stop()
+                blink_ampm.to = 1// Set the final opacity to 1
+                blink_ampm.stop()
+                blink_mt.to = 1// Set the final opacity to 1
+                blink_mt.stop()
+                blink_day.to = 1// Set the final opacity to 1
+                blink_day.stop()
+
+
         }
             else
             {
+
+
+                blink_hr.to = 1// Set the final opacity to 1
                 blink_hr.stop()
+                blink_min.to = 1// Set the final opacity to 1
                 blink_min.stop()
+                blink_ampm.to = 1// Set the final opacity to 1
                 blink_ampm.stop()
+                blink_mt.to = 1// Set the final opacity to 1
                 blink_mt.stop()
+                blink_day.to = 1// Set the final opacity to 1
                 blink_day.stop()
+                blink_wk.to = 1// Set the final opacity to 1
                 blink_wk.stop()
+
+
 
             }
         }
