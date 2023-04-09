@@ -155,12 +155,12 @@ Window {
        x:100
        y:400
 
-       width:100
+       width:200
        height:width
        radius: width/2
 
        Rectangle{
-           width:8
+           width:16
            height:width
            radius: width/2
            color: "green"
@@ -172,21 +172,27 @@ Window {
 
        Rectangle{
            id: move_target
-           width:4
+           x:95
+           y:95
+           width:10
            height:width
            radius: width/2
            color: "red"
-           anchors.horizontalCenter: joystick_area.horizontalCenter
-           anchors.verticalCenter: joystick_area.verticalCenter
+
            MouseArea
            {
                id:joystick_con
                anchors.fill:parent
                drag.target: move_target
+               drag.axis: Drag.XAndYAxis
                drag.minimumX: 0
                drag.maximumX: joystick_area.width - move_target.width
                drag.minimumY: 0
                drag.maximumY: joystick_area.height - move_target.width
+               onPressed: {
+                   move_target.anchors.undefined
+               }
+
                onPositionChanged:
                {
                    console.log("x: "+ mouse.x + "y: "+mouse.y)
