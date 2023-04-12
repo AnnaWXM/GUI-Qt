@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "heli_joystick.h"
 
 
 int main(int argc, char *argv[])
@@ -10,6 +12,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    heli_joystick to;
+        engine.rootContext()->setContextProperty("heli_joystick",&to);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -20,3 +26,6 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
+
+

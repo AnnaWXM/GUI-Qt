@@ -12,9 +12,11 @@ Window {
 
     //postition variable for the moving object
 
-    property int xpos:40
-    property int ypos:50
+    property int xpos:Screen.width/2
+    property int ypos:Screen.height/2 *0.9
     property int rot:0
+    property int centerx:Screen.width/2
+    property int centery:Screen.height/2 *0.9
 
     Image {
         id: backSky
@@ -152,18 +154,23 @@ Window {
 
        id:joystick_area
 
-       x:100
-       y:400
 
        width:200
        height:width
        radius: width/2
 
+       anchors {
+           left: butt_hori_forward.right
+           leftMargin: 50
+           bottom: parent.bottom
+           bottomMargin: 25
+       }
+
        Rectangle{
            width:16
            height:width
            radius: width/2
-           color: "green"
+           color: "#8bd3dd"
            anchors.horizontalCenter: joystick_area.horizontalCenter
            anchors.verticalCenter: joystick_area.verticalCenter
 
@@ -177,30 +184,56 @@ Window {
            width:10
            height:width
            radius: width/2
-           color: "red"
-
-           MouseArea
+           color: "#f582ae"          
+       }
+       MouseArea
+       {
+           id:joystick_con
+           anchors.fill:parent
+           drag.target: move_target
+           drag.axis: Drag.XAndYAxis
+           drag.minimumX: 0
+           drag.maximumX: joystick_area.width - move_target.width
+           drag.minimumY: 0
+           drag.maximumY: joystick_area.height - move_target.width
+           drag
            {
-               id:joystick_con
-               anchors.fill:parent
-               drag.target: move_target
-               drag.axis: Drag.XAndYAxis
-               drag.minimumX: 0
-               drag.maximumX: joystick_area.width - move_target.width
-               drag.minimumY: 0
-               drag.maximumY: joystick_area.height - move_target.width
-               onPressed: {
-                   move_target.anchors.undefined
-               }
+               target: move_target
+               axis: Drag.XAndYAxis
+               minimumX: joystick_area.x - move_target.width / 2
+               maximumX: joystick_area.x + joystick_area.width - move_target.width / 2
+               minimumY: joystick_area.y - move_target.height / 2
+               maximumY: joystick_area.y + joystick_area.height - move_target.height / 2
+           }
 
-               onPositionChanged:
-               {
-                   console.log("x: "+ mouse.x + "y: "+mouse.y)
-               }
+           onPressed: {
+               move_target.anchors.undefined
+           }
+
+           onPositionChanged:
+           {
+                xpos=(move_target.x/190)*Screen.width
+                ypos=(move_target.y/190)*Screen.height*0.9
+               console.log("x: "+ move_target.x + " y: "+move_target.y)
+               console.log("xpos: "+ xpos + " ypos: "+ypos)
+
            }
        }
 
 
    }
+   Connections
+   {
+       target:heli_joystick
+       ignoreUnknownSignals: true
+//       function onSendMessHr(hr_value){
+//           timehr.text=hr_value;
+//       }
+//       function onSendMessMin(min_value){
+//           timemin.text=min_value;
+//       }
 
+
+
+   }
 }
