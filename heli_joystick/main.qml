@@ -12,11 +12,14 @@ Window {
 
     //postition variable for the moving object
 
-    property int xpos:Screen.width/2
-    property int ypos:Screen.height/2 *0.9
+    property double xpos:Screen.width/2
+    property double ypos:Screen.height/2 *0.9
     property int rot:0
-    property int centerx:Screen.width/2
-    property int centery:Screen.height/2 *0.9
+
+    //initializing the speed porportion variable
+    property double speedX: 0
+    property double speedY: 0
+
 
     Image {
         id: backSky
@@ -177,6 +180,31 @@ Window {
 
        }
 
+       Timer{
+           id: speedTime
+           interval: 100
+           running: true
+           repeat: true
+           onTriggered: {
+               xpos+=(100*speedX)
+               if (xpos>1920){
+                   xpos=1920;
+               }
+               else if (xpos<0){
+                   xpos=0;
+               }
+               ypos+=(100*speedY)
+               if (ypos>972){
+                   ypos=972;
+               }
+               else if (ypos<0){
+                   ypos=0;
+               }
+           }
+
+
+       }
+
        Rectangle{
            id: move_target
            x:95
@@ -208,13 +236,25 @@ Window {
 
            onPressed: {
                move_target.anchors.undefined
+               heli_joystick.flyingT()
+               speedTime.start()
+           }
+           onReleased:  {
+               heli_joystick.stopping()
+               move_target.x=95
+               move_target.y=95
+               speedX=0
+               speedY=0
+
            }
 
            onPositionChanged:
            {
-                xpos=(move_target.x/190)*Screen.width
-                ypos=(move_target.y/190)*Screen.height*0.9
+               speedX=(move_target.x-95)/95
+               speedY=(move_target.y-95)/95
+
                console.log("x: "+ move_target.x + " y: "+move_target.y)
+               console.log("speedX: "+ speedX + " speedY: "+speedY)
                console.log("xpos: "+ xpos + " ypos: "+ypos)
 
            }
@@ -226,12 +266,24 @@ Window {
    {
        target:heli_joystick
        ignoreUnknownSignals: true
-//       function onSendMessHr(hr_value){
-//           timehr.text=hr_value;
-//       }
-//       function onSendMessMin(min_value){
-//           timemin.text=min_value;
-//       }
+       //if statements to avoid the heli gos off the boundary
+       function onSendMessMove(x_value, y_value){
+           xpos=xpos+x_value;
+           if (xpos>1920){
+               xpos=1920;
+           }
+           else if (xpos<0){
+               xpos=0;
+           }
+
+           ypos=ypos+y_value;
+           if (ypos>972){
+               ypos=1920;
+           }
+           else if (xpos<0){
+               ypos=0;
+           }
+       }
 
 
 

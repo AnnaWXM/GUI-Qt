@@ -13,10 +13,16 @@ public:
 
 public slots:
     void displayText(const QString &s);
+    double movingSpeedX(double x);
+    double movingSpeedY(double y);
+    double xCheck(double x);
+    double yCheck(double y);
+    void movingVar();
+    void flying();
+    void stopping();
 
 signals:
-//    void sendMessMin(const QString &txt_box_str2);
-//    void sendMessHr(const QString &txt_box_str3);
+    void sendMessMove(const double &x_value, const double &y_value);
 };
 
 #endif // HELI_JOYSTICK_H
