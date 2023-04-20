@@ -15,6 +15,54 @@ Window {
 
     property double slider_val
 
+    Item {
+        id: root
+
+        x:100
+        y:50
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: -50
+        anchors.horizontalCenterOffset: 0
+
+        property real value: 0
+
+        width:143
+        height:133
+
+        Image {
+            id: background
+            x:150
+
+
+            width:200
+            height:200
+
+            source: "/new/prefix1/background2"
+        }
+
+        Image {
+            id: needle
+            x:240
+            y:43
+            width:20
+            height:66
+            antialiasing: true
+            source: "/new/prefix1/needle2.png"
+            transform: Rotation{
+                id:needleRotation
+                origin.x:10; origin.y:60
+                angle:Math.min(Math.max(-130,slider_val*60-130),133)
+                Behavior on angle{
+                    SpringAnimation{
+                        spring:1.4
+                        damping: .15
+                    }
+                }
+            }
+        }
+    }
+
+
 
     CircularGauge{
             id: gauge1
@@ -24,7 +72,6 @@ Window {
             height: 133
             visible: true
             value: slider_val*20
-
 
             style: CircularGaugeStyle
             {
