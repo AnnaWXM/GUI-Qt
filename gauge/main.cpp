@@ -1,5 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "gauge.h"
+
 
 
 int main(int argc, char *argv[])
@@ -10,6 +13,10 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    gauge to;
+        engine.rootContext()->setContextProperty("gauge",&to);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -20,3 +27,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
