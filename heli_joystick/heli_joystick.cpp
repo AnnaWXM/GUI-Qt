@@ -3,6 +3,7 @@
 #include <string>
 #include <QDebug>
 #include <QTimer>
+#include <QRect>
 
 
 QTimer *timerNew= new QTimer();

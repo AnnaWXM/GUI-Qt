@@ -24,9 +24,15 @@ Window {
 
     //for the obsticle creation
     property int rectangleCount:0
-    //bool for gameover
-    property bool gameOver: false
+    //bool for hitting target
+    property bool catchedApple:false
+
+    //property bool gameOver: false
     property int fall_Speed:200
+
+    //score accumulator
+    property int scoreA:0
+
 
 
 
@@ -38,33 +44,25 @@ Window {
 
     }
 
-    Item{
+    Image{
         id: heli_to_go
         x: xpos
         y: ypos
         width:75
         height:75
-
-        Image
-        {
-            width:75
-            height:75
-            id: heli_to_go_image
-            source:"fighter.png"
-            //transform: Rotation { origin.x: 210; origin.y: 63; axis { x: 0; y: 1; z: 0 } angle: rot }
-
-        }
+        source:"fighter.png"
 
     }
 
 
 
-    Item {
+    Image {
         id: obs1
         width: 80
         height: 80
         x: Math.random() * (parent.width - width)
         y: -height
+        source:"apple.png"
 
         Timer {
             id: obs1_timer
@@ -81,28 +79,19 @@ Window {
                     console.log("1:"+obs1.x)
 
                 }
-
-                obs2_timer.start()
-
             }
         }
-        Image
-        {
-            width: 80
-            height: 80
-            id: apple_1
-            source:"apple.png"
 
-        }
 
     }
 
-    Item {
+    Image {
         id: obs2
         width: 80
         height: 80
         x: Math.random() * (parent.width - width)
         y: -height
+        source:"apple.png"
 
         Timer {
             id: obs2_timer
@@ -119,28 +108,19 @@ Window {
                     console.log("2:"+obs2.x)
 
                 }
-
-                obs3_timer.start(10000)
-
             }
         }
-        Image
-        {
-            width: 80
-            height: 80
-            id: apple_2
-            source:"apple.png"
 
-        }
 
     }
 
-    Item {
+    Image {
         id: obs3
         width: 80
         height: 80
         x: Math.random() * (parent.width - width)
         y: -height
+        source:"apple.png"
 
         Timer {
             id: obs3_timer
@@ -157,23 +137,17 @@ Window {
 
             }
         }
-        Image
-        {
-            width: 80
-            height: 80
-            id: apple_3
-            source:"apple.png"
 
-        }
 
     }
 
-    Item {
+    Image {
         id: obs4
         width: 80
         height: 80
         x: Math.random() * (parent.width - width)
         y: -height
+        source:"apple.png"
 
         Timer {
             id: obs4_timer
@@ -189,22 +163,16 @@ Window {
                 }
             }
         }
-        Image
-        {
-            width: 80
-            height: 80
-            id: apple_4
-            source:"apple.png"
 
-        }
     }
 
-    Item {
+    Image {
         id: obs5
         width: 80
         height: 80
         x: Math.random() * (parent.width - width)
         y: -height
+        source:"apple.png"
 
         Timer {
             id: obs5_timer
@@ -219,25 +187,34 @@ Window {
                 }
             }
         }
-        Image
-        {
-            width: 80
-            height: 80
-            id: apple_5
-            source:"apple.png"
 
-        }
 
     }
+
+    //for overlap detection
+    function detectCollision(item1, item2) {
+        return item1.x < item2.x + item2.width &&
+                item1.x + item1.width > item2.x &&
+                item1.y < item2.y + item2.height &&
+                item1.y + item1.height > item2.y
+    }
+
+    //checking overlap
     Timer {
         interval: 100
         running: true
         repeat: true
         onTriggered: {
-            if (heli_to_go.collidesWith(obs1) || heli_to_go.collidesWith(obs2)||
-                    heli_to_go.collidesWith(obs3)|| heli_to_go.collidesWith(obs4)|| heli_to_go.collidesWith(obs5))
+            if (detectCollision(heli_to_go, obs1)||detectCollision(heli_to_go, obs2)||detectCollision(heli_to_go, obs3)
+                    ||detectCollision(heli_to_go, obs4)||detectCollision(heli_to_go, obs5)){
+
+                catchedApple=true;
+            }
+
+            if(catchedApple)
             {
-                console.log("Overlap detected!")
+                scoreA+=1;
+                console.log("Caught one!")
             }
         }
     }
@@ -294,8 +271,6 @@ Window {
                 color: "#8bd3dd"
                 anchors.horizontalCenter: joystick_area.horizontalCenter
                 anchors.verticalCenter: joystick_area.verticalCenter
-
-
             }
 
             Timer{
@@ -319,8 +294,6 @@ Window {
                         ypos=0;
                     }
                 }
-
-
             }
 
             Rectangle{
@@ -394,10 +367,10 @@ Window {
             text: "Pause"
             onClicked: {
                 obs1_timer.stop()
-                obs2_timer.stop(1000)
-                obs3_timer.stop(2000)
-                obs4_timer.stop(3000)
-                obs5_timer.stop(4000)
+                obs2_timer.stop()
+                obs3_timer.stop()
+                obs4_timer.stop()
+                obs5_timer.stop()
                 console.log("pausing")
 
             }
@@ -418,8 +391,8 @@ Window {
                 obs5.y = -obs5.height
 
                 console.log("stopping")
-
-                rectangleCount = 0
+                //resetting score
+                scoreA = 0
             }
         }
     }

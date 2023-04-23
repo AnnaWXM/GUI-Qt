@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QWidget>
 
+
 class heli_joystick:public QObject
 {
     Q_OBJECT
