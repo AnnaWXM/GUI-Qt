@@ -28,10 +28,15 @@ Window {
     property bool catchedApple:false
 
     //property bool gameOver: false
-    property int fall_Speed:200
+    property int fall_Speed:100
+    property int fall_distance:5
 
     //score accumulator
     property int scoreA:0
+    property int lifeLeft:5
+    property int levelInt:1
+    property int levelUp:0
+
 
     //for overlap detection
     function detectCollision(item1, item2) {
@@ -40,7 +45,6 @@ Window {
                 item1.y < item2.y + item2.height &&
                 item1.y + item1.height > item2.y
     }
-
 
 
     Image {
@@ -61,7 +65,83 @@ Window {
 
     }
 
+    Image{
+        id: lifeInt
+        x: 50
+        y: 50
+        width:30
+        height:30
+        source:"heart.png"
 
+    }
+    Rectangle{
+        id: lifeIntText
+        x: 100
+        y: 50
+        width:80
+        height:30
+        border.width: 1
+        border.color: "black"
+        Text {
+            anchors.centerIn: parent
+            text: lifeLeft
+            color: "black"
+            font.family: "Arial"
+            font.pixelSize: 20
+            font.bold: true
+        }
+    }
+    Image{
+        id: scoreTotal
+        x: 200
+        y: 50
+        width:30
+        height:30
+        source:"coin.png"
+
+    }
+    Rectangle{
+        id: scoreTotalText
+        x: 250
+        y: 50
+        width:80
+        height:30
+        border.width: 1
+        border.color: "black"
+        Text {
+            anchors.centerIn: parent
+            text: scoreA
+            color: "black"
+            font.family: "Arial"
+            font.pixelSize: 20
+            font.bold: true
+        }
+    }
+    Image{
+        id: levelIntImage
+        x: 340
+        y: 50
+        width:50
+        height:30
+        source:"level_c.png"
+
+    }
+    Rectangle{
+        id: levelIntText
+        x: 410
+        y: 50
+        width:80
+        height:30
+        border.width: 1
+        border.color: "black"
+        Text {
+            anchors.centerIn: parent
+            text: levelInt
+            color: "black"
+            font.family: "Arial"
+            font.pixelSize: 20
+            font.bold: true
+        }    }
 
     Image {
         id: obs1
@@ -79,11 +159,20 @@ Window {
             repeat: true
             onTriggered: {
 
-                obs1.y += 10 // move down 10 pixels
+                obs1.y += fall_distance // move down distance
                 if (obs1.y >= 770|| detectCollision(heli_to_go, obs1)) {
+                    if (detectCollision(heli_to_go, obs1)){
+                        scoreA+=1
+                        levelUp+=1
+                        console.log("scoreA:"+scoreA)
+
+                    }
+                    else{
+                    lifeLeft-=1
+                        console.log("lifeLeft:"+lifeLeft)
+                    }
                     obs1.y = -obs1.height // start from top again
                     obs1.x = Math.random() * 1880 // randomize x position
-                    console.log("1:"+obs1.x)
 
                 }
             }
@@ -108,12 +197,20 @@ Window {
             repeat: true
             onTriggered: {
 
-                obs2.y += 10 // move down 10 pixels
+                obs2.y += fall_distance // move down distance
                 if (obs2.y >= 770|| detectCollision(heli_to_go, obs2)) {
+                    if (detectCollision(heli_to_go, obs2)){
+                        scoreA+=1
+                        levelUp+=1
+                        console.log("scoreA:"+scoreA)
+
+                    }
+                    else{
+                    lifeLeft-=1
+                        console.log("lifeLeft:"+lifeLeft)
+                    }
                     obs2.y = -obs2.height // start from top again
                     obs2.x = Math.random() * 1880 // randomize x position
-                    console.log("2:"+obs2.x)
-
                 }
             }
         }
@@ -136,8 +233,18 @@ Window {
             running: false
             repeat: true
             onTriggered: {
-                obs3.y += 10 // move down 10 pixels
+                obs3.y += fall_distance // move down distance
                 if (obs3.y >= 770|| detectCollision(heli_to_go, obs3)) {
+                    if (detectCollision(heli_to_go, obs3)){
+                        scoreA+=1
+                        levelUp+=1
+                        console.log("scoreA:"+scoreA)
+
+                    }
+                    else{
+                    lifeLeft-=1
+                        console.log("lifeLeft:"+lifeLeft)
+                    }
                     obs3.y = -obs3.height // start from top again
                     obs3.x = Math.random() * 1880 // randomize x position
                 }
@@ -163,8 +270,18 @@ Window {
             running: false
             repeat: true
             onTriggered: {
-                obs4.y += 10 // move down 10 pixels
+                obs4.y += fall_distance // move down distance
                 if (obs4.y >= 770 || detectCollision(heli_to_go, obs4)) {
+                    if (detectCollision(heli_to_go, obs4)){
+                        scoreA+=1
+                        levelUp+=1
+                        console.log("scoreA:"+scoreA)
+
+                    }
+                     else{
+                    lifeLeft-=1
+                        console.log("lifeLeft:"+lifeLeft)
+                    }
                     obs4.y = -obs4.height // start from top again
                     obs4.x = Math.random() * 1880 // randomize x position
                 }
@@ -187,8 +304,18 @@ Window {
             running: false
             repeat: true
             onTriggered: {
-                obs5.y += 10 // move down 10 pixels
+                obs5.y += fall_distance // move down distance
                 if (obs5.y >= 770 || detectCollision(heli_to_go, obs5)) {
+                    if (detectCollision(heli_to_go, obs5)){
+                        scoreA+=1
+                        levelUp+=1
+                        console.log("scoreA:"+scoreA)
+
+                    }
+                    else{
+                    lifeLeft-=1
+                        console.log("lifeLeft:"+lifeLeft)
+                    }
                     obs5.y = -obs5.height // start from top again
                     obs5.x = Math.random() * 1880 // randomize x position
                 }
@@ -200,22 +327,35 @@ Window {
 
 
 
-    //checking overlap
+    //checking for level up or game over
     Timer {
         interval: 100
         running: true
         repeat: true
         onTriggered: {
-            if (detectCollision(heli_to_go, obs1)||detectCollision(heli_to_go, obs2)||detectCollision(heli_to_go, obs3)
-                    ||detectCollision(heli_to_go, obs4)||detectCollision(heli_to_go, obs5)){
+            if (levelUp>=10){
+                levelUp=0;
+                levelInt+=1;
+                //adding distance to the fall == moving faster
+                fall_distance+=5;
+                console.log("Level UP!")
 
-                catchedApple=true;
             }
 
-            if(catchedApple)
+            if(lifeLeft<=0)
             {
-                scoreA+=1;
-                console.log("Caught one!")
+                backSky.source="game_over.png"
+                obs1_timer.stop()
+                obs2_timer.stop()
+                obs3_timer.stop()
+                obs4_timer.stop()
+                obs5_timer.stop()
+                obs1.y = -obs1.height
+                obs2.y = -obs2.height
+                obs3.y = -obs3.height
+                obs4.y = -obs4.height
+                obs5.y = -obs5.height
+                console.log("Game Over!")
             }
         }
     }
@@ -328,7 +468,7 @@ Window {
 
                 onPressed: {
                     move_target.anchors.undefined
-                    heli_joystick.flyingT()
+                    heli_joystick.flying()
                     speedTime.start()
                 }
                 onReleased:  {
@@ -345,10 +485,6 @@ Window {
                     speedX=(move_target.x-70)/70
                     speedY=(move_target.y-70)/70
 
-                    console.log("x: "+ move_target.x + " y: "+move_target.y)
-                    console.log("speedX: "+ speedX + " speedY: "+speedY)
-                    console.log("xpos: "+ xpos + " ypos: "+ypos)
-
                 }
             }
 
@@ -360,6 +496,7 @@ Window {
             onClicked: {
                 trigger_sequence.start()
                 trigger_sequence.repeat=true
+                backSky.source=skyGrass.jpg
 
             }
         }
