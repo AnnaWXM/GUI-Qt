@@ -33,6 +33,13 @@ Window {
     //score accumulator
     property int scoreA:0
 
+    //for overlap detection
+    function detectCollision(item1, item2) {
+        return item1.x < item2.x + item2.width &&
+                item1.x + item1.width > item2.x &&
+                item1.y < item2.y + item2.height &&
+                item1.y + item1.height > item2.y
+    }
 
 
 
@@ -73,7 +80,7 @@ Window {
             onTriggered: {
 
                 obs1.y += 10 // move down 10 pixels
-                if (obs1.y >= 770) {
+                if (obs1.y >= 770|| detectCollision(heli_to_go, obs1)) {
                     obs1.y = -obs1.height // start from top again
                     obs1.x = Math.random() * 1880 // randomize x position
                     console.log("1:"+obs1.x)
@@ -102,7 +109,7 @@ Window {
             onTriggered: {
 
                 obs2.y += 10 // move down 10 pixels
-                if (obs2.y >= 770) {
+                if (obs2.y >= 770|| detectCollision(heli_to_go, obs2)) {
                     obs2.y = -obs2.height // start from top again
                     obs2.x = Math.random() * 1880 // randomize x position
                     console.log("2:"+obs2.x)
@@ -130,7 +137,7 @@ Window {
             repeat: true
             onTriggered: {
                 obs3.y += 10 // move down 10 pixels
-                if (obs3.y >= 770) {
+                if (obs3.y >= 770|| detectCollision(heli_to_go, obs3)) {
                     obs3.y = -obs3.height // start from top again
                     obs3.x = Math.random() * 1880 // randomize x position
                 }
@@ -157,7 +164,7 @@ Window {
             repeat: true
             onTriggered: {
                 obs4.y += 10 // move down 10 pixels
-                if (obs4.y >= 770) {
+                if (obs4.y >= 770 || detectCollision(heli_to_go, obs4)) {
                     obs4.y = -obs4.height // start from top again
                     obs4.x = Math.random() * 1880 // randomize x position
                 }
@@ -181,7 +188,7 @@ Window {
             repeat: true
             onTriggered: {
                 obs5.y += 10 // move down 10 pixels
-                if (obs5.y >= 770) {
+                if (obs5.y >= 770 || detectCollision(heli_to_go, obs5)) {
                     obs5.y = -obs5.height // start from top again
                     obs5.x = Math.random() * 1880 // randomize x position
                 }
@@ -191,13 +198,7 @@ Window {
 
     }
 
-    //for overlap detection
-    function detectCollision(item1, item2) {
-        return item1.x < item2.x + item2.width &&
-                item1.x + item1.width > item2.x &&
-                item1.y < item2.y + item2.height &&
-                item1.y + item1.height > item2.y
-    }
+
 
     //checking overlap
     Timer {
@@ -396,6 +397,7 @@ Window {
             }
         }
     }
+
 
 
     Connections
